@@ -12,12 +12,17 @@ class EvaluationPipeline:
         pass
 
     def main(self):
+        import os
+
+        os.environ["MLFLOW_TRACKING_URI"]=""
+        os.environ["MLFLOW_TRACKING_USERNAME"]=""
+        os.environ["MLFLOW_TRACKING_PASSWORD"]=""
         config = ConfigurationManager()
         eval_config = config.get_evaluation_config()
         evaluation = Evaluation(eval_config)
         evaluation.evaluation()
         evaluation.save_score()
-        # evaluation.log_into_mlflow()
+        evaluation.log_into_mlflow()
 
 
 
